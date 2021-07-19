@@ -1,6 +1,7 @@
 *,
 *::before,
 *::after {
+  outline: none;
   box-sizing: border-box;
 }
 
@@ -8,4 +9,26 @@ html,
 body {
   margin: 0;
   padding: 0;
+  color: #4F4F4F;
+  line-height: $defLineHeight;
+  font-family: 'Gilroy', sans-serif;
+  font-size: $defFontSize;
+}
+
+div {
+  position: relative;
+}
+
+h1 {
+  font-size: 1.5em;
+}
+
+h2 {
+  font-size: 1em;
+}
+
+h1, h2 {
+  font-weight: 700;
+  margin-top: 0;
+  margin-bottom: 0;
 }

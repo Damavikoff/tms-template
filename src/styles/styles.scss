@@ -6,3 +6,434 @@
 // Components
 
 @import './components/global.scss';
+@import './components/fonts.css';
+
+// Stuff
+
+body {
+    height: 100vh;
+    padding: 2rem 5rem;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+}
+
+// Dashboard
+
+.dashboard {
+    display: grid;
+    max-height: 100%;
+    grid-template: 5rem minmax(0, 1fr) / 4rem 1fr;
+    background-color: #EFF3F9;
+    border-radius: .7rem;
+    border: 1px solid #EFF3F9;
+    aside {
+        grid-area: 1 / 1 / span 2 / span 1;
+        padding: 2.25em .5em;
+        background-color: white;
+        border-right: 1px solid #EBEBEB;
+    }
+    header{
+        grid-area: 1 / 2 / span 1 / span 1;
+        padding: 2em 3em;
+        h1 {
+            margin-right: 1em;
+        }
+    }
+    main {
+        grid-area: 2 / 2;
+        padding: 1em;
+        overflow-y: auto;
+        > .grid {
+            display: grid;
+            // grid-template: repeat(3, auto) / repeat(10, 10fr);
+            grid-template-columns: repeat(15, 1fr);
+            grid-auto-rows: min-content;
+            grid-gap: 1.5rem;
+        }
+    }
+}
+
+.dashboard.inverted {
+    background-color: #212427;
+    color: #CACACA;
+    aside {
+        border-color: #4D4D4D;
+        background-color: #282C31;
+    }
+}
+
+aside .menu > .item + .item {
+    padding-left: 2em;
+}
+
+header > .menu {
+    height: 100%;
+}
+
+// Menu
+
+.menu {
+    display: flex;
+    &:not(.vertical) > .item + .item {
+        padding-left: 1em;
+    }
+    &.centered {
+        align-items: center;
+    }
+    &.vertical {
+        flex-flow: column;
+        .item + .item {
+            padding-top: 1em;
+        }
+    }
+    &.relaxed {
+        justify-content: space-between;
+    }
+    > .item {
+        &.centered {
+            align-self: center;
+        }
+        &.fluid {
+            flex-grow: 1;
+        }
+        &[class*="right aligned"] {
+            margin-left: auto;
+        }
+    }
+    > .item > img {
+        width: 100%;
+        &:only-child {
+            display: block;
+        }
+    }
+}
+
+
+// Links
+
+.link:not(.active) {
+    cursor: pointer;
+    &:not(.active) {
+        opacity: .9;
+    }
+    &:not(.active):hover {
+        opacity: 1;
+    }
+}
+
+a.image {
+    display: inline-block;
+    > img {
+        width: 100%;
+        max-width: 1.25em;
+        max-height: 1.25em;
+    }
+    + a.image {
+        margin-top: 2em;
+    }
+}
+
+// List
+
+nav.vertical > * {
+    display: block;
+}
+
+
+// Toggle
+
+.toggle > input {
+    display: none;
+}
+
+.toggle {
+    > label {
+        width: 3em;
+        height: 1.5em;
+        border-radius: 1em;
+        padding: .2em;
+        border: 1px solid #5a5a5a;
+        display: block;
+        cursor: pointer;
+        opacity: .8;
+        &:hover {
+            opacity: 1;
+        }
+        > .switch {
+            width: 1em;
+            height: 1em;
+            background-color: #7F7FD5;
+            border-radius: 50%;
+            transition: all .5s ease;
+            > img {
+                position: absolute;
+                width: 60%;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+            }
+        }
+    }
+    > input {
+        &:checked + label > .switch {
+            margin-left: 100%;
+            transform: translateX(-100%);
+        }
+    }
+}
+
+.toggle.inverted .switch, .dashboard.inverted .toggle .switch {
+    box-shadow: inset 0 0 0 4px white;
+    > img {
+        display: none;
+    }
+}
+
+
+// Search input
+
+label.search.input {
+    position: relative;
+    display: block;
+    > input {
+        max-width: 15em;
+        border: 1px solid #EBEBEB;
+        font-size: .6em;
+        border-radius: .7em;
+        color: #979797;
+        padding: .7em;
+        padding-left: 3em;
+        &::placeholder {
+            color: #979797;
+        }
+    }
+    > img {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        left: .7em;
+    }
+}
+
+.search.input.inverted, .dashboard.inverted .search.input {
+    > input {
+        color: #979797;
+        border-color: #979797;
+        background-color: inherit;
+        ::placeholder {
+            color: #979797;
+        }
+    }
+}
+
+// Header
+
+.header {
+    font-weight: 600;
+    > img {
+        vertical-align: middle;
+        width: 2.5em;
+        margin-right: .5em;
+    }
+    &.right > img {
+        margin-left: .5em;
+        margin-right: 0;
+    }
+}
+
+// Segment
+
+.segment {
+    padding: 1em;
+    border-radius: .7em;
+    border: 1px solid #EBEBEB;
+    background-color: white;
+    .legend {
+        font-size: .6em;
+        img {
+            vertical-align: middle;
+        }
+        > .items {
+            font-weight: 600;
+            > .item > img {
+                margin-right: .5em;
+                vertical-align: middle;
+            }
+            > .item.grey {
+                color: #979797
+            }
+        }
+    }
+    > .header {
+        display: flex;
+        align-items: center;
+        flex-flow: row nowrap;
+        > *:not(:only-child):last-child {
+            margin-left: auto;
+        }
+        + .description {
+            margin-top: 2em;
+        }
+    }
+    > .content {
+        margin-top: 1em;
+    }
+    > .description {
+        font-weight: 500;
+        > .meta {
+            vertical-align: middle;
+            color: #979797;
+            > img.arrow {
+                margin-left: .5em;
+                width: .5em;
+            }
+        }
+    }
+    &.line-chart {
+        > .content > img {
+            width: 100%;
+        }
+        .legend {
+            > div {
+                display: inline-block;
+            }
+            > .date-range {
+                font-weight: 500;
+                margin-right: 2em;
+                > img {
+                    width: .7em;
+                    margin-left: .4em;
+                }
+            }
+            > .items {
+                > .item {
+                    display: inline-block;
+                    + .item {
+                        margin-left: 1em;
+                    }
+                }
+            }
+        }
+    }
+    &.pie-chart {
+        > .content {
+            display: grid;
+            grid-template-columns: minmax(3em, 65%) minmax(3em, 35%);
+            > img {
+                max-width: 100%;
+            }
+        }
+        .legend > .items {
+            padding-left: .5em;
+            > .item + .item {
+                margin-top: .5em
+            }
+        }
+    }
+    &.progress-chart {
+        > .content {
+            display: flex;
+            flex-wrap: wrap;
+            > .item {
+                width: 50%;
+                > .legend {
+                    font-weight: 500;
+                    font-size: .6em;
+                    margin-bottom: 1em;
+                    > .meta {
+                        float: right;
+                        color: #979797;
+                    }
+                }
+                > .bar {
+                    width: 100%;
+                    height: .5em;
+                    border-radius: 1em;
+                    background-color: #EFF3F9;
+                    > .purple {
+                        background-color: #7F7FD5;
+                        position: absolute;
+                        height: 100%;
+                        top: 0;
+                        left: 0;
+                        border-radius: 1em;
+                    }
+                }
+            }
+            > .item:nth-child(odd) {
+                padding-right: 1em;
+            }
+            > .item:nth-child(even) {
+                padding-left: 1em;
+            }
+            >.item:nth-child(n+3) {
+                margin-top: 1em;
+            }
+        }
+    }
+}
+
+.segment.inverted, .dashboard.inverted .segment {
+    border-color: #4D4D4D;
+    background-color: #282C31;
+    .meta {
+        color: #979797;
+    }
+}
+
+// Misc
+
+img.expand {
+    width: .5em;
+    margin-left: .5em;
+}
+
+img.more {
+    width: 1.25em;
+}
+
+[class*="right floated"] {
+    float: right;
+}
+
+.segment-1 {
+    grid-area: 1 / 1 / span 1 / span 5;
+}
+
+.segment-2 {
+    grid-area: 1 / 6 / span 1 / span 5;
+}
+
+.segment-3 {
+    grid-area: 1 / 11 / span 1 / span 5;
+}
+
+.segment-4 {
+    grid-area: 2 / 1 / span 1 / span 11;
+}
+
+.segment-5 {
+    grid-area: 2 / 12 / span 1 / span 4;
+}
+
+.segment-6 {
+    grid-area: 3 / 1 / span 1 / span 9;
+}
+
+.segment-7 {
+    grid-area: 3 / 10 / span 1 / span 6;
+}
+
+body > img {
+    position: absolute;
+    z-index: -1;
+    &.background-1 {
+        top: 0;
+        left: 0;
+    }
+    &.background-2 {
+        right: 0;
+        bottom: 0;
+    }
+}
